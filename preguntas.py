@@ -121,7 +121,16 @@ def pregunta_04():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        date = row[2].split("-")[1]
+        if values.get(date) is None:
+            values[date] = 1
+        else:
+            values[date] += 1
+            
+    return list(sorted(values.items(), key = lambda x: (x[0],x[1])))
 
 
 def pregunta_05():
@@ -300,4 +309,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    pass
+    print(pregunta_04())
