@@ -14,10 +14,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 import os
 import csv
 
-#Settigs
-
-
-
 def __read_csv():
     Path = os.getcwd()
     file =  "data.csv"
@@ -62,7 +58,16 @@ def pregunta_02():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        if values.get(letter) is None:
+            values[letter] = 0
+        else:
+            values[letter] += 1
+    
+    return list(sorted(values.items(), key = lambda x: (x[0],x[1])))
 
 
 def pregunta_03():
@@ -284,4 +289,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_01())
+    pass
