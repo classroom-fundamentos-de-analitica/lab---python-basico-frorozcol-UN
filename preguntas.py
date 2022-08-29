@@ -11,7 +11,20 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import os
+import csv
 
+def __read_csv():
+    Path = os.getcwd()
+    file =  "data.csv"
+    path_data = os.path.join(Path, file)
+    values = []
+    with open(path_data, "r") as file:
+        data = csv.reader(file, delimiter="\t")
+        for row in data:
+            values.append(row)
+    return values
+    
 
 def pregunta_01():
     """
@@ -21,7 +34,13 @@ def pregunta_01():
     214
 
     """
-    return
+    data = __read_csv()
+    total = 0
+    for row in data:
+        total += int(row[1])
+        
+
+    return total
 
 
 def pregunta_02():
@@ -39,7 +58,16 @@ def pregunta_02():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        if values.get(letter) is None:
+            values[letter] = 0
+        else:
+            values[letter] += 1
+    
+    return list(sorted(values.items(), key = lambda x: (x[0],x[1])))
 
 
 def pregunta_03():
@@ -57,7 +85,18 @@ def pregunta_03():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        numb = int(row[1])
+        if values.get(letter) is None:
+            values[letter] = numb
+        else:
+            values[letter] += numb
+    
+    return list(sorted(values.items(), key = lambda x: (x[0],x[1])))
+
 
 
 def pregunta_04():
@@ -82,7 +121,16 @@ def pregunta_04():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        date = row[2].split("-")[1]
+        if values.get(date) is None:
+            values[date] = 1
+        else:
+            values[date] += 1
+            
+    return list(sorted(values.items(), key = lambda x: (x[0],x[1])))
 
 
 def pregunta_05():
@@ -258,3 +306,7 @@ def pregunta_12():
 
     """
     return
+
+
+if __name__ == "__main__":
+    print(pregunta_04())
