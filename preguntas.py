@@ -11,7 +11,24 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import os
+import csv
 
+#Settigs
+
+
+
+def __read_csv():
+    Path = os.getcwd()
+    file =  "data.csv"
+    path_data = os.path.join(Path, file)
+    values = []
+    with open(path_data, "r") as file:
+        data = csv.reader(file, delimiter="\t")
+        for row in data:
+            values.append(row)
+    return values
+    
 
 def pregunta_01():
     """
@@ -21,7 +38,13 @@ def pregunta_01():
     214
 
     """
-    return
+    data = __read_csv()
+    total = 0
+    for row in data:
+        total += int(row[1])
+        
+
+    return total
 
 
 def pregunta_02():
@@ -258,3 +281,7 @@ def pregunta_12():
 
     """
     return
+
+
+if __name__ == "__main__":
+    print(pregunta_01())
