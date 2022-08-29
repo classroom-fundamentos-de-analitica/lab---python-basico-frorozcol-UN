@@ -85,7 +85,18 @@ def pregunta_03():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        numb = int(row[1])
+        if values.get(letter) is None:
+            values[letter] = numb
+        else:
+            values[letter] += numb
+    
+    return list(sorted(values.items(), key = lambda x: (x[0],x[1])))
+
 
 
 def pregunta_04():
