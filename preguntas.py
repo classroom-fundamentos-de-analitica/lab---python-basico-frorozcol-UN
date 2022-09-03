@@ -11,6 +11,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from operator import le
 import os
 import csv
 
@@ -63,7 +64,7 @@ def pregunta_02():
     for row in data:
         letter = row[0]
         if values.get(letter) is None:
-            values[letter] = 0
+            values[letter] = 1
         else:
             values[letter] += 1
     
@@ -148,7 +149,17 @@ def pregunta_05():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        number = int(row[1])
+        if values.get(letter):
+            values[letter]  += [number]
+        else:
+            values[letter] = [number]
+
+    return sorted(tuple(map(lambda x: ( x[0], max(x[1]), min(x[1]) ), values.items() )))
 
 
 def pregunta_06():
@@ -173,7 +184,21 @@ def pregunta_06():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        fil = row[4].split(",")
+        for i in fil:
+            letter, number = i.split(":")
+            number = int(number)
+            if values.get(letter):
+                values[letter]  += [number]
+            else:
+                values[letter] = [number]
+    
+    return list(sorted(tuple(map(lambda x: ( x[0], min(x[1]), max(x[1]) ), values.items() ))))
+        
+    
 
 
 def pregunta_07():
@@ -197,7 +222,18 @@ def pregunta_07():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        number = int(row[1])
+        if values.get(number):
+            values[number]  += [letter]
+        else:
+            values[number] = [letter]
+
+    return list(sorted(values.items()))
+
 
 
 def pregunta_08():
@@ -222,7 +258,17 @@ def pregunta_08():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        number = int(row[1])
+        if values.get(number):
+            values[number].add(letter)
+        else:
+            values[number] = {letter}
+    
+    return  sorted({key : sorted(value) for key, value in values.items() }.items())
 
 
 def pregunta_09():
@@ -245,7 +291,17 @@ def pregunta_09():
     }
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        fil = row[4].split(",")
+        for i in fil:
+            letter, _ = i.split(":")
+            if values.get(letter):
+                values[letter]  += 1
+            else:
+                values[letter] = 1
+    return dict(sorted(values.items()))
 
 
 def pregunta_10():
@@ -266,7 +322,16 @@ def pregunta_10():
 
 
     """
-    return
+    data = __read_csv()
+    values = []
+    for row in data:
+        col_1 = row[0]
+        len_col_4 = len(row[3].split(","))
+        len_col_5 = len(row[4].split(","))
+        values.append((col_1, len_col_4, len_col_5))
+        
+        
+    return values
 
 
 def pregunta_11():
@@ -287,7 +352,17 @@ def pregunta_11():
 
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        col_1 = int(row[1])
+        len_col_4 = row[3].split(",")
+        for v in len_col_4:
+            if values.get(v):
+                values[v]  += col_1
+            else:
+                values[v] = col_1
+    return dict(sorted(values.items(), key=lambda x: (x[0],x[1])))
 
 
 def pregunta_12():
@@ -305,8 +380,18 @@ def pregunta_12():
     }
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        col_1 = row[0]
+        c  = row[4].replace(":", " ").replace(",", " ")
+        len_col_4 = sum([int(x) for x in c.split() if x.isdigit()])
+        if values.get(col_1):
+            values[col_1]  += len_col_4
+        else:
+            values[col_1] = len_col_4
+    return dict(sorted(values.items(), key=lambda x: (x[0],x[1])))
 
 
 if __name__ == "__main__":
-    print(pregunta_04())
+    print(pregunta_09())
