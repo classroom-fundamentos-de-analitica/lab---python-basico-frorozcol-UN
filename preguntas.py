@@ -222,7 +222,18 @@ def pregunta_07():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        number = int(row[1])
+        if values.get(number):
+            values[number]  += [letter]
+        else:
+            values[number] = [letter]
+
+    return sorted(values.items())
+
 
 
 def pregunta_08():
@@ -334,4 +345,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_06())
+    print(pregunta_07())
