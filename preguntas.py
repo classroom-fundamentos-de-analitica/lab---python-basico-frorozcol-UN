@@ -291,7 +291,17 @@ def pregunta_09():
     }
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        fil = row[4].split(",")
+        for i in fil:
+            letter, _ = i.split(":")
+            if values.get(letter):
+                values[letter]  += 1
+            else:
+                values[letter] = 1
+    return sorted(values.items())
 
 
 def pregunta_10():
@@ -312,7 +322,16 @@ def pregunta_10():
 
 
     """
-    return
+    data = __read_csv()
+    values = []
+    for row in data:
+        col_1 = row[0]
+        len_col_4 = len(row[3].split(","))
+        len_col_5 = len(row[4].split(","))
+        values.append((col_1, len_col_4, len_col_5))
+        
+        
+    return values
 
 
 def pregunta_11():
@@ -355,4 +374,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_05())
+    print(pregunta_10())
