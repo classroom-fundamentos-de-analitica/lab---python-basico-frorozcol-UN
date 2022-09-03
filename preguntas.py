@@ -11,6 +11,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from operator import le
 import os
 import csv
 
@@ -148,7 +149,17 @@ def pregunta_05():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        number = int(row[1])
+        if values.get(letter):
+            values[letter]  += [number]
+        else:
+            values[letter] = [number]
+
+    return sorted(tuple(map(lambda x: ( x[0], max(x[1]), min(x[1]) ), values.items() )))
 
 
 def pregunta_06():
@@ -309,4 +320,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_02())
+    print(pregunta_05())
