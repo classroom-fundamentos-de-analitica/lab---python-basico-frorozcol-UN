@@ -159,7 +159,7 @@ def pregunta_05():
         else:
             values[letter] = [number]
 
-    return list(sorted(tuple(map(lambda x: ( x[0], max(x[1]), min(x[1]) ), values.items() ))))
+    return sorted(tuple(map(lambda x: ( x[0], max(x[1]), min(x[1]) ), values.items() )))
 
 
 def pregunta_06():
@@ -355,4 +355,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_08())
+    print(pregunta_05())
