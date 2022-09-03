@@ -63,7 +63,7 @@ def pregunta_02():
     for row in data:
         letter = row[0]
         if values.get(letter) is None:
-            values[letter] = 0
+            values[letter] = 1
         else:
             values[letter] += 1
     
@@ -309,4 +309,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_04())
+    print(pregunta_02())
