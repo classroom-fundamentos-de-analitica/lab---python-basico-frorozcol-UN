@@ -184,7 +184,21 @@ def pregunta_06():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        fil = row[4].split(",")
+        for i in fil:
+            letter, number = i.split(":")
+            number = int(number)
+            if values.get(letter):
+                values[letter]  += [number]
+            else:
+                values[letter] = [number]
+    
+    return sorted(tuple(map(lambda x: ( x[0], min(x[1]), max(x[1]) ), values.items() )))
+        
+    
 
 
 def pregunta_07():
@@ -320,4 +334,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_05())
+    print(pregunta_06())
