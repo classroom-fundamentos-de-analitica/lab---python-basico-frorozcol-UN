@@ -159,7 +159,7 @@ def pregunta_05():
         else:
             values[letter] = [number]
 
-    return sorted(tuple(map(lambda x: ( x[0], max(x[1]), min(x[1]) ), values.items() )))
+    return list(sorted(tuple(map(lambda x: ( x[0], max(x[1]), min(x[1]) ), values.items() ))))
 
 
 def pregunta_06():
@@ -196,7 +196,7 @@ def pregunta_06():
             else:
                 values[letter] = [number]
     
-    return sorted(tuple(map(lambda x: ( x[0], min(x[1]), max(x[1]) ), values.items() )))
+    return list(sorted(tuple(map(lambda x: ( x[0], min(x[1]), max(x[1]) ), values.items() ))))
         
     
 
@@ -232,7 +232,7 @@ def pregunta_07():
         else:
             values[number] = [letter]
 
-    return sorted(values.items())
+    return list(sorted(values.items()))
 
 
 
@@ -258,7 +258,17 @@ def pregunta_08():
     ]
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        letter = row[0]
+        number = int(row[1])
+        if values.get(number):
+            values[number].add(letter)
+        else:
+            values[number] = {letter}
+    
+    return  sorted({key : sorted(value) for key, value in values.items() }.items())
 
 
 def pregunta_09():
@@ -345,4 +355,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_07())
+    print(pregunta_08())
