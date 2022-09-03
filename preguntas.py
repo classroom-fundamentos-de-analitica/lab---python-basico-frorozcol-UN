@@ -352,7 +352,17 @@ def pregunta_11():
 
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        col_1 = int(row[1])
+        len_col_4 = row[3].split(",")
+        for v in len_col_4:
+            if values.get(v):
+                values[v]  += col_1
+            else:
+                values[v] = col_1
+    return dict(sorted(values.items(), key=lambda x: (x[0],x[1])))
 
 
 def pregunta_12():
@@ -370,8 +380,18 @@ def pregunta_12():
     }
 
     """
-    return
+    data = __read_csv()
+    values = {}
+    for row in data:
+        col_1 = row[0]
+        c  = row[4].replace(":", " ").replace(",", " ")
+        len_col_4 = sum([int(x) for x in c.split() if x.isdigit()])
+        if values.get(col_1):
+            values[col_1]  += len_col_4
+        else:
+            values[col_1] = len_col_4
+    return dict(sorted(values.items(), key=lambda x: (x[0],x[1])))
 
 
 if __name__ == "__main__":
-    print(pregunta_10())
+    print(pregunta_12())
