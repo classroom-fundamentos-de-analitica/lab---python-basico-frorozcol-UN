@@ -301,7 +301,7 @@ def pregunta_09():
                 values[letter]  += 1
             else:
                 values[letter] = 1
-    return sorted(values.items())
+    return dict(sorted(values.items()))
 
 
 def pregunta_10():
@@ -394,4 +394,4 @@ def pregunta_12():
 
 
 if __name__ == "__main__":
-    print(pregunta_12())
+    print(pregunta_09())
